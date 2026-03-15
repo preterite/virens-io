@@ -1,0 +1,847 @@
+/* ==========================================================================
+   VIRENS.IO — Dark Theme
+   Warm charcoal base (#1c1a18), Jade accent (#4CAF7A)
+   Cooper Hewitt headings, Libre Baskerville body, JetBrains Mono code/nav
+
+   This file contains all shared visual design for virens.io mockups.
+   Page-specific components (workflow strips, category grids, requirement
+   tables, etc.) remain in each mockup's inline <style> block.
+
+   Load order: virens-base.css → virens-dark-theme.css → inline overrides
+   ========================================================================== */
+
+
+/* ===== 1. COLOR SYSTEM ===== */
+
+:root {
+  /* Background */
+  --color-bg-dark: #1c1a18;            /* "Gondola" — body, header, footer */
+  --color-bg-light: #26241f;           /* "Shark" — cards, elevated surfaces */
+
+  /* Text */
+  --color-text: #d8d4ce;               /* warm off-white */
+  --color-text-muted: #9a9590;         /* secondary text */
+  --color-muted: #6e6a65;              /* tertiary, labels, metadata */
+
+  /* Accent — Jade family, lightened for dark-bg contrast */
+  --color-accent-bright: #4CAF7A;      /* "Jungle Green" — primary accent */
+  --color-accent-muted: #3d9668;       /* quieter Jade for borders, subtle UI */
+  --color-accent-hover: #5ecf92;       /* hover/focus state */
+
+  /* Links */
+  --color-link: #4CAF7A;
+  --color-link-hover: #5ecf92;
+
+  /* Borders + surfaces */
+  --color-border: #3a3630;
+  --color-card-bg: #26241f;
+  --color-card-border: #3a3630;
+  --color-code-bg: #1a1816;
+  --color-input-bg: #26241f;
+  --color-tag-bg: #2e2c27;
+
+  /* Navigation */
+  --color-nav-bg: rgba(28, 26, 24, 0.95);  /* semi-transparent for scroll-behind */
+  --color-nav-hover: #1c1a18;               /* matches body — distinct from active */
+  --color-nav-active: #2e2c27;
+  --color-mobile-menu-bg: #1c1a18;
+
+  /* Buttons */
+  --color-button-bg: #4CAF7A;
+  --color-button-hover: #5ecf92;
+  --color-button-text: #1c1a18;
+
+  /* Header animation gradient stops */
+  --anim-color-1: #2a2824;
+  --anim-color-2: #3d3a34;
+  --anim-color-3: #504c44;
+
+  /* Callout box variants */
+  --callout-prereq-bg: rgba(76, 175, 122, 0.08);
+  --callout-prereq-border: #4CAF7A;
+  --callout-warning-bg: rgba(204, 153, 0, 0.08);
+  --callout-warning-border: #cc9900;
+  --callout-warning-text: #e6b800;
+  --callout-tip-bg: rgba(76, 175, 122, 0.06);
+  --callout-tip-border: #3d9668;
+  --callout-note-bg: rgba(154, 149, 144, 0.08);
+  --callout-note-border: #6e6a65;
+}
+
+
+/* ===== 2. BODY + PAGE WRAPPER ===== */
+
+body {
+  background-color: var(--color-bg-dark);
+  color: var(--color-text);
+}
+
+/* clip (not hidden) — hidden creates a scroll container that breaks
+   position: sticky on the sidebar TOC. Chrome 90+, Firefox 81+, Safari 16+. */
+.page-wrapper {
+  overflow-x: clip;
+}
+
+
+/* ===== 3. TYPOGRAPHY ===== */
+/* Cooper Hewitt leads on virens.io (all headings).
+   Part of three-site rotation: Baskerville → verdantinquiry,
+   Cooper Hewitt → virens.io, JetBrains Mono → virens.me. */
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Cooper Hewitt', 'Segoe UI', system-ui, sans-serif;
+}
+
+h1 {
+  font-weight: 700;
+  font-size: 2.25rem;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  color: var(--color-text);
+}
+
+h2 {
+  font-weight: 700;
+  font-size: 1.625rem;
+  line-height: 1.25;
+  margin-top: 2.5em;
+  margin-bottom: 0.75em;
+  color: var(--color-text);
+}
+
+h3 {
+  font-weight: 700;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  margin-top: 1.75em;
+  margin-bottom: 0.5em;
+  color: var(--color-text);
+}
+
+h4 {
+  font-weight: 500;
+  font-size: 1.0625rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+  color: var(--color-text-muted);
+}
+
+
+/* ===== 4. HEADER ===== */
+
+header {
+  background-color: var(--color-bg-dark);
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 1rem 2rem;
+  position: relative;
+  z-index: 2;
+}
+
+.header-logo {
+  position: relative;
+  padding: 0;
+  background: none;
+  border: none;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.4));
+}
+
+.header-logo img {
+  max-height: 100px;
+  width: auto;
+  display: block;
+}
+
+.header-text {
+  padding-top: 0.4em;
+}
+
+/* Site title — covers both <h1> (index) and <p id="site-title"> (content pages) */
+.header-text #site-title,
+.header-text h1 {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  margin: 0;
+  line-height: 1.1;
+}
+
+.header-text #site-title a,
+.header-text h1 a {
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+#site-description {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-weight: 300;
+  font-size: 0.9375rem;
+  letter-spacing: 0.03em;
+  color: var(--color-text-muted);
+  margin: 0.25em 0 0 0;
+}
+
+
+/* ===== 5. NAVIGATION ===== */
+/* Fixes for base CSS typography leaks into nav (ul margin/padding,
+   li margin-bottom) — identified session 14a, confirmed session 14i. */
+
+.site-nav, nav {
+  background: var(--color-nav-bg);
+  border-bottom: 1px solid var(--color-border);
+  border-top: none;
+}
+
+.site-nav .nav-list {
+  flex-wrap: nowrap;
+  margin: 0;
+  padding: 0;
+}
+
+.site-nav .nav-item {
+  margin-bottom: 0;
+}
+
+.nav-item a {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  letter-spacing: 0.02em;
+  color: var(--color-text-muted);
+  padding: 8px 14px;
+  transition: color 0.2s ease, background-color 0.2s ease;
+}
+
+.nav-item a:hover {
+  color: var(--color-accent-bright);
+  background: var(--color-nav-hover);
+}
+
+.nav-item.active a {
+  color: var(--color-accent-bright);
+  background: var(--color-nav-active);
+  border-bottom: none;
+  box-shadow: inset 0 -2px 0 var(--color-accent-bright);
+}
+
+.nav-crosslink a {
+  font-style: italic;
+  color: var(--color-muted) !important;
+}
+
+.nav-crosslink a:hover {
+  color: var(--color-accent-muted) !important;
+}
+
+
+/* ===== 6. DIVIDER STRIPS ===== */
+/* Dividers sit between nav and content (header) and content and footer.
+   The 355px margin-top positions the header divider below the fixed
+   chrome (header + nav + animation gradient). Canvas at 104% width
+   with -2% offset hides edge gaps on dark backgrounds. */
+
+.page-wrapper > .divider-full-bleed.divider-header {
+  margin-top: 355px;
+}
+
+body.header-compact .page-wrapper > .divider-full-bleed.divider-header {
+  margin-top: 109px;
+}
+
+.divider-full-bleed {
+  border-top: 3px solid var(--color-bg-dark);
+  border-bottom: 3px solid var(--color-bg-dark);
+}
+
+.divider-full-bleed .threshold-strip {
+  background-color: var(--color-bg-dark);
+}
+
+.divider-full-bleed .threshold-strip canvas {
+  width: 104%;
+  margin-left: -2%;
+}
+
+
+/* ===== 7. COMPACT HEADER (squoosh) ===== */
+/* Shrinks header on scroll to reclaim vertical space. The squoosh
+   threshold is set per-page via data-squoosh-threshold on <body>.
+   Transition properties cover both <h1> (index) and #site-title. */
+
+body.header-compact header { padding: 0; }
+body.header-compact .header-content { padding: 0.5rem 2rem; }
+body.header-compact .header-logo img { max-height: 48px; }
+body.header-compact #site-title,
+body.header-compact .header-text h1 { font-size: 1.25rem; }
+body.header-compact #site-description { font-size: 0; opacity: 0; margin: 0; }
+body.header-compact .header-animation { opacity: 0.5; }
+
+.header-logo img,
+#site-title,
+.header-text h1,
+#site-description,
+.header-animation {
+  transition: all 0.3s ease;
+}
+
+
+/* ===== 8. SINGLE-COLUMN PAGE LAYOUT ===== */
+/* Pages without a sidebar (index, community, about) override base
+   main's padding-top. The divider above main already clears the
+   fixed chrome, so only breathing room is needed.
+   Content pages use base's flex layout with full 392px clearance. */
+
+body[data-page-type="index"] main,
+body[data-page-type="community"] main,
+body[data-page-type="about"] main {
+  padding-top: var(--gutter);
+  display: block;
+}
+
+
+/* ===== 9. READING COLUMN ===== */
+/* Baskerville body text for semi-long documentation and prose.
+   680px max-width matches verdantinquiry's reading column. */
+
+.reading-column {
+  font-family: 'Libre Baskerville', 'Georgia', serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-text);
+  max-width: 680px;
+}
+
+.reading-column p {
+  margin-bottom: 1.25em;
+}
+
+.reading-column a {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-decoration-color: rgba(76, 175, 122, 0.3);
+  text-underline-offset: 0.15em;
+  transition: text-decoration-color 0.2s ease;
+}
+
+.reading-column a:hover {
+  color: var(--color-link-hover);
+  text-decoration-color: var(--color-link-hover);
+}
+
+.reading-column ul,
+.reading-column ol {
+  margin: 1em 0;
+  padding-left: 1.5em;
+}
+
+.reading-column li {
+  margin-bottom: 0.5em;
+}
+
+/* Inline code in prose — accent-tinted for visibility on dark bg */
+.reading-column code,
+code:not(pre code) {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875em;
+  padding: 0.15em 0.4em;
+  background: rgba(76, 175, 122, 0.08);
+  border: 1px solid rgba(76, 175, 122, 0.15);
+  border-radius: 3px;
+  color: var(--color-accent-hover);
+}
+
+kbd {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125em;
+  padding: 0.1em 0.45em;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-border);
+  border-bottom-width: 2px;
+  border-radius: 3px;
+  color: var(--color-text);
+}
+
+
+/* ===== 10. BOX ACCENT — virens.io identity mark ===== */
+/* Portrait-oriented rectangle from the six-lines mark, positioned
+   left of h2 headings. Baseline-anchored so it aligns with text
+   regardless of line wrapping. virens.io = container system = frame.
+   verdantinquiry uses three horizontal lines; virens.me TBD. */
+
+.reading-column h2 {
+  position: relative;
+  padding-left: 1.75rem;
+  padding-bottom: 0.3em;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.reading-column h2::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: calc(0.5em + 1px);
+  width: 14px;
+  height: 20px;
+  border: 2px solid rgba(76, 175, 122, 0.4);
+  border-radius: 1px;
+  transition: border-color 0.3s ease;
+}
+
+.reading-column h2:first-child {
+  margin-top: 0;
+}
+
+
+/* ===== 11. CARDS ===== */
+/* Base card — no accent mark (that's on h2 headings now). */
+
+.card {
+  position: relative;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 4px;
+  padding: 1.5rem 1.75rem;
+  margin-bottom: 1.5rem;
+}
+
+.card h3 { margin-top: 0; font-size: 1.125rem; }
+.card p:last-child { margin-bottom: 0; }
+
+
+/* ===== 12. CALLOUT BOXES ===== */
+/* Four variants: prereq (green), warning (gold), tip (muted green), note (gray).
+   Used in documentation for prerequisites, warnings, tips, and annotations. */
+
+.callout-box {
+  position: relative;
+  padding: 1.25rem 1.5rem;
+  margin: 1.75rem 0;
+  border-radius: 4px;
+  border: 1px solid var(--color-border);
+  border-left-width: 4px;
+}
+
+.callout-box::before {
+  display: block;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.625rem;
+}
+
+.callout-box p { margin: 0 0 0.5em 0; font-size: 0.9375rem; }
+.callout-box p:last-child { margin-bottom: 0; }
+
+.callout-prereq { background: var(--callout-prereq-bg); border-left-color: var(--callout-prereq-border); }
+.callout-prereq::before { content: '◆ Prerequisites'; color: var(--callout-prereq-border); }
+.callout-warning { background: var(--callout-warning-bg); border-left-color: var(--callout-warning-border); }
+.callout-warning::before { content: '⚠ Warning'; color: var(--callout-warning-text); }
+.callout-tip { background: var(--callout-tip-bg); border-left-color: var(--callout-tip-border); }
+.callout-tip::before { content: '→ Tip'; color: var(--callout-tip-border); }
+.callout-note { background: var(--callout-note-bg); border-left-color: var(--callout-note-border); }
+.callout-note::before { content: '● Note'; color: var(--color-text-muted); }
+
+
+/* ===== 13. CODE BLOCKS + SYNTAX HIGHLIGHTING ===== */
+
+.code-block-wrapper {
+  margin: 1.5em 0;
+  border: 1px solid var(--color-border);
+  border-radius: 4px;
+  overflow: hidden;
+  background: var(--color-code-bg);
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background: var(--color-card-bg);
+  border-bottom: 1px solid var(--color-border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  letter-spacing: 0.03em;
+}
+
+.code-lang { color: var(--color-accent-muted); }
+
+.copy-button {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  padding: 0.25rem 0.75rem;
+  background: transparent;
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.copy-button:hover {
+  background: var(--color-nav-hover);
+  color: var(--color-accent-bright);
+  border-color: var(--color-accent-muted);
+}
+
+.code-block-wrapper pre {
+  margin: 0;
+  padding: 1rem 1.25rem;
+  border: none;
+  border-radius: 0;
+  overflow-x: auto;
+  background: transparent;
+}
+
+.code-block-wrapper pre code {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: transparent;
+  padding: 0;
+}
+
+/* Rouge syntax highlighting — warm palette for dark bg */
+.highlight .c, .highlight .c1, .highlight .cm { color: #6e6a65; font-style: italic; }
+.highlight .k, .highlight .kd, .highlight .kn { color: #4CAF7A; }
+.highlight .s, .highlight .s1, .highlight .s2 { color: #a8c97a; }
+.highlight .n, .highlight .nx { color: var(--color-text); }
+.highlight .o { color: #9a9590; }
+.highlight .nb { color: #5ecf92; }
+.highlight .nf { color: #c9a96e; }
+.highlight .mi, .highlight .mf { color: #b89adf; }
+.highlight .nv, .highlight .vi { color: #7ab8c9; }
+
+
+/* ===== 14. STEP SECTIONS ===== */
+/* Numbered procedural steps for documentation walkthroughs.
+   Counter auto-increments; the numbered circle is absolute-positioned. */
+
+.step-section {
+  counter-increment: step-counter;
+  position: relative;
+  padding-left: 3.5rem;
+  margin: 2rem 0;
+}
+
+.step-number {
+  font-family: 'JetBrains Mono', monospace;
+  position: absolute;
+  left: 0;
+  top: 0.1em;
+  width: 2.25rem;
+  height: 2.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(76, 175, 122, 0.12);
+  border: 1px solid var(--color-accent-muted);
+  border-radius: 50%;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--color-accent-bright);
+}
+
+.step-section h3 { margin-top: 0; }
+
+
+/* ===== 15. BREADCRUMBS ===== */
+
+.breadcrumbs {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+  margin-bottom: 1.5rem;
+  padding-top: 0.5rem;
+}
+
+.breadcrumbs a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+}
+
+.breadcrumbs a:hover { color: var(--color-accent-bright); }
+.breadcrumb-sep { margin: 0 0.4em; color: var(--color-muted); }
+.breadcrumb-current { color: var(--color-text); }
+
+
+/* ===== 16. PAGE LEDE ===== */
+/* Title block at top of content pages — h1, subtitle, abstract, meta, tags. */
+
+.page-lede {
+  margin-bottom: 2.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.page-lede h1 { margin-bottom: 0.25em; }
+
+.page-subtitle {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-weight: 300;
+  font-size: 1.25rem;
+  color: var(--color-text-muted);
+  margin: 0 0 1em 0;
+  line-height: 1.4;
+}
+
+.page-abstract {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  padding-left: 1em;
+  border-left: 2px solid var(--color-accent-muted);
+}
+
+.page-abstract p { margin: 0; }
+
+.page-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin-top: 1rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+  color: var(--color-muted);
+}
+
+.page-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35em;
+}
+
+.page-meta .meta-label {
+  color: var(--color-text-muted);
+  font-weight: 500;
+}
+
+.page-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.doc-tag {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.6875rem;
+  padding: 0.2em 0.6em;
+  background: var(--color-tag-bg);
+  color: var(--color-text-muted);
+  border: 1px solid var(--color-border);
+  border-radius: 3px;
+  letter-spacing: 0.02em;
+}
+
+
+/* ===== 17. SIDEBAR COMPONENTS ===== */
+/* Order: section TOC → layer strip → docs nav → tagline box.
+   Text-image-text sandwich pattern (session 14i). */
+
+.content-sidebar .sidebar-section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.content-sidebar .sidebar-section:last-child { border-bottom: none; }
+
+/* Section TOC ("On This Page") */
+.section-toc {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-size: 0.8125rem;
+}
+
+.section-toc h3 {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 0.5rem 0;
+}
+
+.section-toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: toc;
+}
+
+.section-toc li {
+  counter-increment: toc;
+  margin: 0;
+}
+
+.section-toc li::before {
+  content: counter(toc) ".";
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  margin-right: 0.35em;
+}
+
+.section-toc a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: 0.2rem 0;
+  display: inline;
+  transition: color 0.15s ease;
+}
+
+.section-toc a:hover { color: var(--color-accent-bright); }
+.section-toc a.toc-active { color: var(--color-accent-bright); font-weight: 500; }
+
+/* Docs nav (sidebar documentation section links) */
+.docs-nav {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.docs-nav h3 {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 0.5rem 0;
+}
+
+.docs-nav ul { list-style: none; padding: 0; margin: 0; }
+.docs-nav li { margin: 0; }
+
+.docs-nav a {
+  display: block;
+  padding: 0.3rem 0 0.3rem 0.75rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.docs-nav a:hover {
+  color: var(--color-accent-bright);
+  border-left-color: var(--color-accent-muted);
+}
+
+.docs-nav a.docs-nav-active {
+  color: var(--color-accent-bright);
+  border-left-color: var(--color-accent-bright);
+  font-weight: 500;
+}
+
+/* Tagline box */
+.tagline-box {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--color-muted);
+  padding: 12px;
+  border: 1px dotted var(--color-border);
+  border-radius: 3px;
+  text-align: center;
+  min-height: 2.5em;
+}
+
+.tagline-box p { margin: 0; }
+
+
+/* ===== 18. PAGE NAV (prev/next) ===== */
+
+.page-nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.8125rem;
+}
+
+.page-nav a {
+  color: var(--color-accent-bright);
+  text-decoration: none;
+  transition: color 0.15s ease;
+}
+
+.page-nav a:hover { color: var(--color-accent-hover); }
+
+
+/* ===== 19. CTA LINK ===== */
+/* Shared action button — mono font, border, accent color.
+   Used on index (open source section), community (GitHub CTA), etc. */
+
+.cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.875rem;
+  color: var(--color-accent-bright);
+  text-decoration: none;
+  padding: 0.625rem 1.25rem;
+  border: 1px solid var(--color-accent-muted);
+  border-radius: 4px;
+  transition: all 0.2s ease;
+}
+
+.cta-link:hover {
+  background: rgba(76, 175, 122, 0.08);
+  border-color: var(--color-accent-bright);
+  color: var(--color-accent-hover);
+}
+
+.cta-link svg { width: 16px; height: 16px; }
+
+.cta-link-secondary {
+  border-color: var(--color-border);
+  color: var(--color-text-muted);
+}
+
+.cta-link-secondary:hover {
+  border-color: var(--color-accent-muted);
+  color: var(--color-accent-bright);
+  background: rgba(76, 175, 122, 0.04);
+}
+
+
+/* ===== 20. RESPONSIVE ===== */
+
+@media (max-width: 768px) {
+  h1 { font-size: 1.75rem; }
+  h2 { font-size: 1.375rem; }
+
+  .header-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 0.75rem 1rem;
+  }
+
+  .header-logo img { max-height: 72px; }
+
+  .step-section { padding-left: 2.75rem; }
+  .step-number { width: 2rem; height: 2rem; font-size: 0.8125rem; }
+
+  .page-meta { flex-direction: column; gap: 0.5rem; }
+
+  .reading-column h2 { padding-left: 1.5rem; }
+  .reading-column h2::before { width: 12px; height: 17px; }
+}

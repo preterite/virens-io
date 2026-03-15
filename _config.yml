@@ -1,0 +1,106 @@
+# VIRENS.IO Jekyll Configuration
+# Technical framework and documentation site
+
+# Site settings
+title: "VIRENS"
+tagline: "verdant inquiry research environment for scholars"
+description: "Open-source research workflow system for humanities scholars. Modular macOS framework integrating Obsidian, Bookends, DEVONthink, and automation tools for academic knowledge work."
+url: "https://virens.io"
+baseurl: ""
+
+# Site identity
+site_type: "virens-io"
+logo: "/assets/img/virens-logo.svg"
+logo_width: 296
+logo_height: 222
+
+# Author/Organization
+author:
+  name: "Mike Edwards"
+  email: "info@virens.io"
+  url: "https://preterite.net"
+
+# Build settings
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  syntax_highlighter_opts:
+    css_class: 'highlight'
+    
+permalink: pretty
+
+# Exclude from processing
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - node_modules
+  - vendor
+  - README.md
+  - LICENSE
+
+# Collections
+collections:
+  docs:
+    output: true
+    permalink: /docs/:path/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: "pages"
+    values:
+      layout: "default"
+  - scope:
+      path: ""
+      type: "docs"
+    values:
+      layout: "doc"
+
+# Navigation
+navigation:
+  main:
+    - title: "Home"
+      url: "/"
+    - title: "Documentation"
+      url: "/documentation/"
+    - title: "Downloads"
+      url: "/downloads/"
+    - title: "GitHub"
+      url: "https://github.com/preterite/SRE"
+      external: true
+    - title: "Community"
+      url: "/community/"
+    - title: "About"
+      url: "/about/"
+  
+  crosslinks:
+    - title: "Theory & Method →"
+      url: "https://verdantinquiry.org"
+      external: true
+    - title: "Dev Blog →"
+      url: "https://virens.me"
+      external: true
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-sitemap
+  - jekyll-seo-tag
+
+# Feed settings
+feed:
+  path: atom.xml
+
+# GitHub repository (for edit links)
+github:
+  repository: preterite/SRE
+  branch: main
+
+# Social
+social:
+  github: preterite/SRE
+  
+# Analytics (placeholder)
+# google_analytics: UA-XXXXXXXXX-X
