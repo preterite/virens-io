@@ -12,9 +12,7 @@
   <link rel="preload" href="{{ '/assets/fonts/LibreBaskerville-Regular.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
   <link rel="preload" href="{{ '/assets/fonts/JetBrainsMono-Regular.woff2' | relative_url }}" as="font" type="font/woff2" crossorigin>
 
-  <!-- Styles
-       virens-base.css: shared structure across all three sites (plain CSS).
-       virens-dark-theme.css: compiled from SCSS partials in _sass/virens-io/. -->
+  <!-- Styles -->
   <link rel="stylesheet" href="{{ '/assets/css/virens-base.css' | relative_url }}">
   <link rel="stylesheet" href="{{ '/assets/css/virens-dark-theme.css' | relative_url }}">
 
@@ -25,7 +23,7 @@
   {% feed_meta %}
 </head>
 
-<body data-site="{{ site.site_type }}" data-page-type="{{ page.page_type | default: 'content' }}">
+<body data-site="{{ site.site_type }}" data-page-type="{{ page.page_type | default: 'content' }}"{% if page.squoosh_threshold %} data-squoosh-threshold="{{ page.squoosh_threshold }}"{% endif %}>
   <div class="page-wrapper">
     <a href="#main" class="skip-link">Skip to main content</a>
 
@@ -37,21 +35,9 @@
       <div class="threshold-strip" data-animation="pixelate" data-src="random"><canvas></canvas></div>
     </div>
 
-    <!-- MAIN CONTENT — two-column: main + sidebar -->
-    <main id="main" class="layout-content"{% if page.aria_label %} aria-labelledby="{{ page.aria_label }}"{% endif %}>
-      <div class="content-body">
-        <div class="main-content">
-          {% if page.show_breadcrumbs %}
-          {% include breadcrumbs.html %}
-          {% endif %}
-
-          {{ content }}
-        </div>
-
-        <aside class="content-sidebar">
-          {% include sidebar.html %}
-        </aside>
-      </div>
+    <!-- MAIN CONTENT — single-column, no sidebar -->
+    <main id="main"{% if page.aria_label %} aria-labelledby="{{ page.aria_label }}"{% endif %}>
+      {{ content }}
     </main>
 
     <!-- Divider: content → footer -->

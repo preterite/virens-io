@@ -1,19 +1,16 @@
 <header>
   <div class="header-animation"></div>
-  
   <div class="header-content">
-    <div class="header-text">
-      <h1 id="site-title">
-        <a href="{{ '/' | relative_url }}">{{ site.title }}</a>
-      </h1>
-      <p id="site-description">{{ site.tagline }}</p>
-    </div>
-    
     <div class="header-logo">
-      <img src="{{ site.logo | relative_url }}" 
-           alt="{{ site.title }} logo" 
-           width="{{ site.logo_width }}" 
-           height="{{ site.logo_height }}">
+      <a href="{{ '/' | relative_url }}"><img src="{{ '/assets/img/virens-logo-jade.svg' | relative_url }}" alt="VIRENS — return to home" width="160" height="120"></a>
+    </div>
+    <div class="header-text">
+      {% if page.page_type == 'index' %}
+      <h1><a href="{{ '/' | relative_url }}">{{ site.title }}</a></h1>
+      {% else %}
+      <p id="site-title"><a href="{{ '/' | relative_url }}">{{ site.title }}</a></p>
+      {% endif %}
+      <p id="site-description">{{ site.tagline }}</p>
     </div>
   </div>
 </header>

@@ -1,0 +1,46 @@
+---
+# Empty front matter triggers Jekyll's Sass compiler.
+# Output: /assets/css/virens-dark-theme.css (one HTTP request)
+#
+# Load order in <head>:
+#   1. virens-base.css  (shared plain CSS, all three sites)
+#   2. virens-dark-theme.css  (compiled from this file)
+---
+
+// ==========================================================================
+// VIRENS.IO — Compiled Theme
+// Warm dark base (#1c1a18), Jade accent (#4CAF7A)
+// Cooper Hewitt headings, Libre Baskerville body, JetBrains Mono code/nav
+//
+// Partials live in /_sass/virens-io/. This manifest controls load order.
+//
+// Uses @use instead of @import (Dart Sass 3.0 migration).
+// Since all partials output plain CSS via custom properties (no Sass
+// variables cross-referenced between partials), @use is a drop-in
+// replacement here.
+// ==========================================================================
+
+// Core theme: color system, typography, header, nav, dividers, squoosh,
+// layout overrides, reading column, box accent, cards, breadcrumbs,
+// page lede, page nav, CTA links, responsive.
+@use "virens-io/theme-core";
+
+// Sidebar: section TOC, docs nav, layer strip, tagline box.
+// Text-image-text sandwich pattern (session 14i).
+@use "virens-io/sidebar";
+
+// Documentation components: callout boxes (prereq/warning/tip/note),
+// code blocks with copy buttons and syntax highlighting, step sections.
+@use "virens-io/docs";
+
+// Index (home) page: lede, workflow strip, quick start, docs grid,
+// crosslinks grid, open source section.
+@use "virens-io/index";
+
+// About page: lede/statement, principles grid, ecosystem cards,
+// requirements table, tier badges, author, contact grid, colophon.
+@use "virens-io/about";
+
+// Community page: prospectus, category icon cards, platform section
+// (GitHub Discussions CTA).
+@use "virens-io/community";

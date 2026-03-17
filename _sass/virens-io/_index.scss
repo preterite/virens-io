@@ -1,0 +1,286 @@
+// ==========================================================================
+// VIRENS.IO — Index (Home) Page Components
+// Promoted from _mockup.html inline styles.
+//
+// Single-column layout (no sidebar). Components: lede, workflow strip,
+// quick start, docs grid, crosslinks, open source section.
+// ==========================================================================
+
+
+// ===== INDEX CONTAINER =====
+
+.index-content {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: var(--gutter) var(--gutter) 3rem;
+}
+
+// Index h2 slightly smaller than documentation h2
+body[data-page-type="index"] h2 { font-size: 1.5rem; }
+
+// Index squoosh uses 400px threshold (raised from 200px, session 14i).
+// Compact divider margin raised to 125px to reduce layout jump.
+body[data-page-type="index"].header-compact .page-wrapper > .divider-full-bleed.divider-header {
+  margin-top: 125px;
+}
+
+
+// ===== LEDE =====
+
+.index-lede {
+  margin-bottom: 3rem;
+}
+
+.index-lede h1 {
+  margin-bottom: 0.5em;
+  font-size: 2.5rem;
+}
+
+.index-lede .subtitle {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-weight: 400;
+  font-size: 1.125rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5em;
+  letter-spacing: 0.01em;
+}
+
+.index-lede .deck {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--color-text);
+  max-width: 680px;
+}
+
+.index-lede .deck p { margin-bottom: 1em; }
+
+
+// ===== WORKFLOW STRIP =====
+
+.workflow-strip {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0;
+  padding: 2rem 1.5rem;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 4px;
+  margin-bottom: 3rem;
+  overflow-x: auto;
+}
+
+.workflow-step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+.workflow-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 14px;
+  right: -1px;
+  width: calc(100% - 44px);
+  height: 1px;
+  background: var(--color-border);
+  transform: translateX(50%);
+}
+
+.workflow-icon {
+  width: 28px;
+  height: 28px;
+  color: var(--color-accent-bright);
+  margin-bottom: 0.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.workflow-icon svg { width: 100%; height: 100%; }
+
+.workflow-label {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-weight: 500;
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+}
+
+
+// ===== QUICK START =====
+
+.quick-start { margin-bottom: 3rem; }
+.quick-start h2 { margin-top: 0; }
+
+.quick-start p {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25em;
+  max-width: 680px;
+}
+
+
+// ===== DOCS GRID =====
+
+.docs-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+
+.docs-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 4px;
+  padding: 1.5rem;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.2s ease;
+}
+
+.docs-card:hover { border-color: var(--color-accent-muted); }
+
+.docs-card-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.875rem;
+  margin-bottom: 0.625rem;
+}
+
+.docs-icon {
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+  color: var(--color-accent-bright);
+  margin-top: 0.15em;
+}
+
+.docs-icon svg { width: 100%; height: 100%; }
+.docs-card h3 { margin: 0; }
+.docs-card h3 a { color: var(--color-text); text-decoration: none; }
+.docs-card:hover h3 a { color: var(--color-accent-bright); }
+
+.docs-card p {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+
+// ===== CROSS-SITE CARDS =====
+
+.crosslinks-section { margin-bottom: 3rem; }
+.crosslinks-section h2 { margin-top: 0; }
+
+.crosslinks-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.crosslink-card {
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-radius: 4px;
+  padding: 1.5rem;
+  text-decoration: none;
+  display: block;
+  transition: border-color 0.2s ease;
+}
+
+.crosslink-card:hover { border-color: var(--color-accent-muted); }
+
+.crosslink-card h3 {
+  margin: 0 0 0.5em 0;
+  font-size: 1rem;
+}
+
+.crosslink-card h3 a {
+  color: var(--color-text);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+
+.crosslink-card h3 a svg {
+  width: 14px;
+  height: 14px;
+  color: var(--color-muted);
+}
+
+.crosslink-card:hover h3 a { color: var(--color-accent-bright); }
+.crosslink-card:hover h3 a svg { color: var(--color-accent-bright); }
+
+.crosslink-card .site-url {
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 0.75rem;
+  color: var(--color-muted);
+  margin-bottom: 0.625em;
+}
+
+.crosslink-card p {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+
+// ===== OPEN SOURCE SECTION =====
+
+.opensource-section {
+  padding: 2rem;
+  background: var(--color-card-bg);
+  border: 1px solid var(--color-card-border);
+  border-left: 3px solid var(--color-accent-muted);
+  border-radius: 4px;
+  margin-bottom: 2rem;
+}
+
+.opensource-section h2 { margin-top: 0; margin-bottom: 0.5em; font-size: 1.25rem; }
+
+.opensource-section p {
+  font-family: 'Libre Baskerville', Georgia, serif;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--color-text-muted);
+  margin-bottom: 1.25em;
+  max-width: 680px;
+}
+
+.cta-row { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+
+// ===== INDEX RESPONSIVE =====
+
+@media (max-width: 768px) {
+  .index-lede h1 { font-size: 1.75rem; }
+
+  .workflow-strip {
+    flex-wrap: wrap;
+    gap: 1rem;
+    justify-content: center;
+    padding: 1.5rem 1rem;
+  }
+
+  .workflow-step:not(:last-child)::after { display: none; }
+  .workflow-step { min-width: 80px; }
+
+  .docs-grid,
+  .crosslinks-grid { grid-template-columns: 1fr; }
+
+  .cta-row { flex-direction: column; }
+}

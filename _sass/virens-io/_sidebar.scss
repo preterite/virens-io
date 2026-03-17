@@ -1,0 +1,129 @@
+// ==========================================================================
+// VIRENS.IO — Sidebar Components
+// Section 17 from the original monolithic theme.
+//
+// Order (text-image-text sandwich, session 14i):
+//   1. Section TOC ("On This Page")
+//   2. Layer strip (dark-variant kits, data-animation="layers")
+//   3. Docs nav (Getting Started, Integrations, Configuration, Reference)
+//   4. Tagline box
+// ==========================================================================
+
+
+// ===== SIDEBAR SECTIONS (shared rhythm) =====
+
+.content-sidebar .sidebar-section {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.content-sidebar .sidebar-section:last-child { border-bottom: none; }
+
+
+// ===== SECTION TOC ("On This Page") =====
+
+.section-toc {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-size: 0.8125rem;
+}
+
+.section-toc h3 {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 0.5rem 0;
+}
+
+.section-toc ol {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  counter-reset: toc;
+}
+
+.section-toc li {
+  counter-increment: toc;
+  margin: 0;
+}
+
+.section-toc li::before {
+  content: counter(toc) ".";
+  color: var(--color-muted);
+  font-size: 0.75rem;
+  margin-right: 0.35em;
+}
+
+.section-toc a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  padding: 0.2rem 0;
+  display: inline;
+  transition: color 0.15s ease;
+}
+
+.section-toc a:hover { color: var(--color-accent-bright); }
+.section-toc a.toc-active { color: var(--color-accent-bright); font-weight: 500; }
+
+
+// ===== DOCS NAV (sidebar documentation section links) =====
+
+.docs-nav {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-size: 0.8125rem;
+  line-height: 1.5;
+}
+
+.docs-nav h3 {
+  font-family: 'Cooper Hewitt', sans-serif;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin: 0 0 0.5rem 0;
+}
+
+.docs-nav ul { list-style: none; padding: 0; margin: 0; }
+.docs-nav li { margin: 0; }
+
+.docs-nav a {
+  display: block;
+  padding: 0.3rem 0 0.3rem 0.75rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  border-left: 2px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.docs-nav a:hover {
+  color: var(--color-accent-bright);
+  border-left-color: var(--color-accent-muted);
+}
+
+.docs-nav a.docs-nav-active {
+  color: var(--color-accent-bright);
+  border-left-color: var(--color-accent-bright);
+  font-weight: 500;
+}
+
+
+// ===== TAGLINE BOX =====
+
+.tagline-box {
+  font-family: 'JetBrains Mono', monospace;
+  font-weight: 400;
+  font-size: 0.8125rem;
+  font-style: italic;
+  color: var(--color-muted);
+  padding: 12px;
+  border: 1px dotted var(--color-border);
+  border-radius: 3px;
+  text-align: center;
+  min-height: 2.5em;
+}
+
+.tagline-box p { margin: 0; }

@@ -1,0 +1,12 @@
+# Documentation sidebar navigation
+# Four top-level categories matching the docs grid on the index page.
+# Used by _includes/sidebar.html to render the docs nav section.
+
+- title: Getting Started
+  url: /documentation/getting-started/
+- title: Integrations
+  url: /documentation/integrations/
+- title: Configuration
+  url: /documentation/configuration/
+- title: Reference
+  url: /documentation/reference/

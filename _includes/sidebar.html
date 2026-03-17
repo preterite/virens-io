@@ -1,25 +1,51 @@
-<!-- Five-layer animated composite strip -->
-<div class="threshold-strip"
-     data-animation="layers"
-     data-speed="slow"
-     data-kit-path="assets/img/layer-kits/"
-     data-kit-count="10">
-  <canvas></canvas>
+<!-- SIDEBAR — DOCUMENTATION PAGES
+     Text-image-text sandwich (session 14i):
+     1. Section TOC ("On This Page")
+     2. Layer strip (dark kits, layers mode)
+     3. Docs nav (four categories from _data/docs_nav.yml)
+     4. Tagline box -->
+<div class="toc-sticky">
+
+  <!-- Section TOC — renders when page provides toc entries via front matter.
+       Active state handled by initTocTracking() in virens.js. -->
+  {% if page.toc %}
+  <div class="section-toc sidebar-section">
+    <h3>On This Page</h3>
+    <ol>
+      {% for item in page.toc %}
+      <li><a href="#{{ item.id }}">{{ item.title }}</a></li>
+      {% endfor %}
+    </ol>
+  </div>
+  {% endif %}
+
+  <!-- Layer strip — 5-layer PNG composite animation (dark kits) -->
+  <div class="sidebar-section">
+    <div class="threshold-strip"
+         data-animation="layers"
+         data-speed="slow"
+         data-kit-path="{{ '/assets/img/layer-kits/' | relative_url }}"
+         data-kit-count="10"><canvas></canvas></div>
+  </div>
+
+  <!-- Docs nav — four top-level categories from _data/docs_nav.yml -->
+  <div class="docs-nav sidebar-section">
+    <h3>Documentation</h3>
+    <ul>
+      {% for item in site.data.docs_nav %}
+      <li>
+        <a href="{{ item.url | relative_url }}"{% if page.url contains item.url %} class="docs-nav-active"{% endif %}>{{ item.title }}</a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+
+
 </div>
 
-<div class="sidebar-section github-widget">
-  <h3>Recent Development</h3>
-  <ul id="github-activity" class="github-activity">
-    <li>Loading recent commits...</li>
-  </ul>
-  <p style="font-size: 0.875rem; margin-top: 12px;">
-    <a href="https://github.com/{{ site.github.repository }}" target="_blank" rel="noopener noreferrer">
-      View on GitHub →
-    </a>
-  </p>
-</div>
-
-<div class="tagline-box">
+<!-- Tagline box — outside .toc-sticky so it scrolls naturally to the
+     page bottom rather than being clipped by the sticky container edge.
+     Also serves as the IntersectionObserver sentinel for initBackToTopPill(). -->
+<div class="tagline-box sidebar-section">
   <p id="tagline-text"></p>
-  <img src="/assets/img/bug-me.png" alt="small ME logo">
 </div>

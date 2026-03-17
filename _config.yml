@@ -3,16 +3,13 @@
 
 # Site settings
 title: "VIRENS"
-tagline: "verdant inquiry research environment for scholars"
+tagline: "tools and documentation"
 description: "Open-source research workflow system for humanities scholars. Modular macOS framework integrating Obsidian, Bookends, DEVONthink, and automation tools for academic knowledge work."
 url: "https://virens.io"
 baseurl: ""
 
 # Site identity
 site_type: "virens-io"
-logo: "/assets/img/virens-logo.svg"
-logo_width: 296
-logo_height: 222
 
 # Author/Organization
 author:
@@ -27,8 +24,12 @@ kramdown:
   syntax_highlighter: rouge
   syntax_highlighter_opts:
     css_class: 'highlight'
-    
+
 permalink: pretty
+
+# Sass/SCSS — compile _sass/virens-io/ partials via manifest
+sass:
+  style: compressed
 
 # Exclude from processing
 exclude:
@@ -56,7 +57,8 @@ defaults:
       path: ""
       type: "docs"
     values:
-      layout: "doc"
+      layout: "default"
+      show_breadcrumbs: true
 
 # Navigation
 navigation:
@@ -68,13 +70,13 @@ navigation:
     - title: "Downloads"
       url: "/downloads/"
     - title: "GitHub"
-      url: "https://github.com/preterite/SRE"
+      url: "https://github.com/preterite/virens-io"
       external: true
     - title: "Community"
       url: "/community/"
     - title: "About"
       url: "/about/"
-  
+
   crosslinks:
     - title: "Theory & Method →"
       url: "https://verdantinquiry.org"
@@ -93,14 +95,8 @@ plugins:
 feed:
   path: atom.xml
 
-# GitHub repository (for edit links)
+# GitHub repository (for edit links and widget)
 github:
-  repository: preterite/SRE
+  repository: preterite/virens-io
   branch: main
 
-# Social
-social:
-  github: preterite/SRE
-  
-# Analytics (placeholder)
-# google_analytics: UA-XXXXXXXXX-X
